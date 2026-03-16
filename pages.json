@@ -1,0 +1,148 @@
+{
+	"pages": [
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "智慧农险工作台",
+				"navigationStyle": "custom",
+				"backgroundColor": "#30BCB7",
+				"backgroundColorTop": "#30BCB7",
+				"backgroundColorBottom": "#F5F7FA",
+				"navigationBarBackgroundColor": "#30BCB7",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/index/city",
+			"style": {
+				"navigationBarTitleText": "切换区域"
+			}
+		},
+		{
+			"path": "pages/order/order",
+			"style": {
+				"navigationBarTitleText": "定损任务看板",
+				"enablePullDownRefresh": true,
+				"backgroundColor": "#F5F7FA"
+			}
+		},
+		{
+			"path": "pages/claims/index",
+			"style": {
+				"navigationBarTitleText": "理赔申请列表",
+				"backgroundColor": "#F5F7FA"
+			}
+		},
+		{
+			"path": "pages/claims/detail",
+			"style": {
+				"navigationBarTitleText": "定损详情与影像对比",
+				"backgroundColor": "#F5F7FA"
+			}
+		},
+		{
+			"path": "pages/claims/apply",
+			"style": {
+				"navigationBarTitleText": "发起理赔报案",
+				"backgroundColor": "#F5F7FA"
+			}
+		},
+		{
+			"path": "pages/policy/order",
+			"style": {
+				"navigationBarTitleText": "我的保单",
+				"enablePullDownRefresh": true,
+				"backgroundColor": "#F5F7FA"
+			}
+		},
+		{
+			"path": "pages/policy/detail",
+			"style": {
+				"navigationBarTitleText": "保单详情",
+				"backgroundColor": "#F5F7FA"
+			}
+		},
+		{
+			"path": "pages/mine/mine",
+			"style": {
+				"navigationBarTitleText": "个人中心",
+				"navigationStyle": "custom",
+				"backgroundColor": "#F5F7FA"
+			}
+		},
+		{
+			"path": "pages/mine/info",
+			"style": {
+				"navigationBarTitleText": "个人信息"
+			}
+		},
+		{
+			"path": "pages/mine/address",
+			"style": {
+				"navigationBarTitleText": "地块/地址管理"
+			}
+		},
+		{
+			"path": "pages/mine/address-edit",
+			"style": {
+				"navigationBarTitleText": "编辑地址"
+			}
+		},
+		{
+			"path": "pages/mine/about",
+			"style": {
+				"navigationBarTitleText": "关于平台"
+			}
+		},
+		{
+			"path": "pages/mine/feedback",
+			"style": {
+				"navigationBarTitleText": "意见反馈"
+			}
+		},
+		{
+			"path": "pages/login/login",
+			"style": {
+				"navigationBarTitleText": "登录"
+			}
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "智慧农险服务平台",
+		"navigationBarBackgroundColor": "#FFFFFF",
+		"backgroundColor": "#F5F7FA"
+	},
+	"tabBar": {
+		"color": "#9A9A9A",
+		"selectedColor": "#3ED09F",
+		"backgroundColor": "#FFFFFF",
+		"list": [
+			{
+				"pagePath": "pages/index/index",
+				"text": "验标",
+				"iconPath": "static/images/nav/index-off.png",
+				"selectedIconPath": "static/images/nav/index-on.png"
+			},
+			{
+				"pagePath": "pages/order/order",
+				"text": "待办任务",
+				"iconPath": "static/images/nav/order-off.png",
+				"selectedIconPath": "static/images/nav/order-on.png"
+			},
+			{
+				"pagePath": "pages/claims/index",
+				"text": "定损理赔",
+				"iconPath": "static/images/nav/shop-off.png",
+				"selectedIconPath": "static/images/nav/shop-on.png"
+			},
+			{
+				"pagePath": "pages/mine/mine",
+				"text": "我的",
+				"iconPath": "static/images/nav/my-off.png",
+				"selectedIconPath": "static/images/nav/my-on.png"
+			}
+		]
+	},
+	"uniIdRouter": {}
+}
