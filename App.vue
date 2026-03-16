@@ -7,22 +7,32 @@
 			curLat: undefined,
 			curLong: undefined,
 			adminLogined: false, // 登陆获取后台的 x-token，只需运行一次
+			versionNum: ''       // 【修复】声明 versionNum 全局变量，防止未定义报错
 		},
 		onLaunch: function() {
 			uni.addInterceptor('request', {
 				success: (res) => {
 					if(res.data.code == 2000) {
-						// 未登录
-						// #ifdef H5
-						uni.redirectTo({
-							url: '/pages/login/login'
+						// 【修复】移除 #ifdef H5，让小程序端也能生效；并加入清除 token 的逻辑
+						uni.removeStorageSync('token')
+						uni.showToast({
+							title: '登录已过期，请重新登录',
+							icon: 'none'
 						})
-						// #endif
+						setTimeout(() => {
+							uni.redirectTo({
+								url: '/pages/login/login'
+							})
+						}, 1000)
 					}
 				},
 			})
-			// 【修改1】使用原生缓存保存版本号
-			uni.setStorageSync('versionNum', uni.getAppBaseInfo().appVersion)
+			
+			// 【修改1】使用原生缓存保存版本号，并同步到 globalData
+			const v = uni.getAppBaseInfo().appVersion
+			uni.setStorageSync('versionNum', v)
+			this.globalData.versionNum = v 
+			
 			this.checkForUpdate(); // 检查新版本
 			this.queryConfigBatch();
 		},
@@ -59,6 +69,7 @@
 					})
 					// 【修改3】使用原生缓存保存系统配置
 					uni.setStorageSync('sysconfigMap', sysconfigMap)
+					// 发出全局通知，告诉所有页面和组件配置已加载完毕
 					uni.$emit('sysconfigOK', sysconfigMap)
 				}
 			},
@@ -154,22 +165,22 @@
 				// #endif
 			},
 			handleMiniProgramBanner(sysconfigMap) {
-							if (!sysconfigMap) sysconfigMap = uni.getStorageSync('sysconfigMap') || {}
-							wx.openCustomerServiceChat({
-								extInfo: {url: sysconfigMap.customerServiceChatUrl },
-								corpId: sysconfigMap.customerServiceChatCorpId,
-								success: res => {},
-								fail: err => {
-									console.error(err)
-								}
-							}) // 👉 注意：这里必须是 }) ，用来闭合 wx.openCustomerServiceChat
-						} // 👉 这里闭合 handleMiniProgramBanner 方法 (因为是最后一个方法，末尾不加逗号也可以)
-					} // 闭合 methods
-				} // 闭合 export default
-			</script>
-			
-			<style>
-				/* #ifdef H5 */  
-				uni-page-head { display: none}  
-				/* #endif */
-			</style>
+				if (!sysconfigMap) sysconfigMap = uni.getStorageSync('sysconfigMap') || {}
+				wx.openCustomerServiceChat({
+					extInfo: {url: sysconfigMap.customerServiceChatUrl },
+					corpId: sysconfigMap.customerServiceChatCorpId,
+					success: res => {},
+					fail: err => {
+						console.error(err)
+					}
+				})
+			} // 【修复】去掉了原来这里多余的三个大括号
+		}
+	}
+</script>
+
+<style>
+	/* #ifdef H5 */  
+	uni-page-head { display: none}  
+	/* #endif */
+</style>
