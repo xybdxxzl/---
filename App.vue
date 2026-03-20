@@ -10,6 +10,7 @@
 			versionNum: ''       // 【修复】声明 versionNum 全局变量，防止未定义报错
 		},
 		onLaunch: function() {
+			// 拦截器配置
 			uni.addInterceptor('request', {
 				success: (res) => {
 					if(res.data.code == 2000) {
@@ -77,7 +78,7 @@
 				// #ifdef MP
 				const updateManager = uni.getUpdateManager();
 				updateManager.onCheckForUpdate(function(res) {
-					console.log(res.hasUpdate);
+					console.log('是否有新版本：', res.hasUpdate);
 				});
 				updateManager.onUpdateReady(function(res) {
 					uni.showModal({
@@ -92,6 +93,10 @@
 				});
 				updateManager.onUpdateFailed(function(res) {
 					// 新的版本下载失败
+					uni.showToast({
+						title: '新版本下载失败，请稍后再试',
+						icon: 'none'
+					})
 				});
 				// #endif
 			},
@@ -156,6 +161,7 @@
 				// #ifdef MP-WEIXIN
 				this.handleMiniProgramBanner(sysconfigMap)
 				// #endif
+				
 				// #ifndef MP-WEIXIN
 				if (sysconfigMap.kf_tel) {
 					uni.makePhoneCall({
@@ -167,11 +173,11 @@
 			handleMiniProgramBanner(sysconfigMap) {
 				if (!sysconfigMap) sysconfigMap = uni.getStorageSync('sysconfigMap') || {}
 				wx.openCustomerServiceChat({
-					extInfo: {url: sysconfigMap.customerServiceChatUrl },
+					extInfo: { url: sysconfigMap.customerServiceChatUrl },
 					corpId: sysconfigMap.customerServiceChatCorpId,
 					success: res => {},
 					fail: err => {
-						console.error(err)
+						console.error('打开客服失败:', err)
 					}
 				})
 			} // 【修复】去掉了原来这里多余的三个大括号
@@ -181,6 +187,6 @@
 
 <style>
 	/* #ifdef H5 */  
-	uni-page-head { display: none}  
+	uni-page-head { display: none; }  
 	/* #endif */
 </style>

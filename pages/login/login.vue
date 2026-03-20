@@ -2,11 +2,11 @@
 	<view class="login-container">
 		<view class="logo-section">
 			<image class="logo" src="/static/images/avatarUrl.png" mode="aspectFit"></image>
-			<text class="app-name">回收小助手</text>
+			<text class="app-name">望果科技</text>
 		</view>
 		
 		<view class="form-section">
-			<view class="welcome-text">欢迎使用回收小助手</view>
+			<view class="welcome-text">欢迎使用望果科技</view>
 			
 			<button class="wx-login-btn" @tap="wxLogin">
 				<text class="btn-text">微信一键登录</text>
